@@ -60,12 +60,12 @@ const observer = new IntersectionObserver((entries) => {
 animatedEls.forEach(el => observer.observe(el));
 
 // ===================================
-// BOOKING FORM: validation + submit
+// BOOKING FORM: validation + Formspree
 // ===================================
 const bookingForm = document.getElementById('bookingForm');
 const formSuccess = document.getElementById('formSuccess');
 
-bookingForm.addEventListener('submit', (e) => {
+bookingForm.addEventListener('submit', async (e) => {
   e.preventDefault();
 
   const requiredFields = bookingForm.querySelectorAll('[required]');
@@ -81,20 +81,32 @@ bookingForm.addEventListener('submit', (e) => {
 
   if (!valid) return;
 
-  // Simulate form submission (replace with your form handler / Formspree / Calendly)
   const submitBtn = bookingForm.querySelector('[type="submit"]');
   submitBtn.textContent = 'Sending...';
   submitBtn.disabled = true;
 
-  setTimeout(() => {
-    formSuccess.classList.add('show');
-    bookingForm.reset();
+  try {
+    const response = await fetch(bookingForm.action, {
+      method: 'POST',
+      body: new FormData(bookingForm),
+      headers: { 'Accept': 'application/json' }
+    });
+
+    if (response.ok) {
+      formSuccess.classList.add('show');
+      bookingForm.reset();
+      setTimeout(() => formSuccess.classList.remove('show'), 6000);
+    } else {
+      const data = await response.json();
+      const msg = data.errors ? data.errors.map(e => e.message).join(', ') : 'Something went wrong. Please try again.';
+      alert(msg);
+    }
+  } catch (err) {
+    alert('Network error. Please try again or email connect@nicolepinkham.com directly.');
+  } finally {
     submitBtn.textContent = 'Send My Request';
     submitBtn.disabled = false;
-
-    // Hide success message after 5s
-    setTimeout(() => formSuccess.classList.remove('show'), 5000);
-  }, 1200);
+  }
 });
 
 // ===================================
