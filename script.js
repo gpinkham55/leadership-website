@@ -109,23 +109,7 @@ bookingForm.addEventListener('submit', async (e) => {
   }
 });
 
-// ===================================
-// NEWSLETTER FORM
-// ===================================
-const newsletterForm = document.getElementById('newsletterForm');
-newsletterForm.addEventListener('submit', (e) => {
-  e.preventDefault();
-  const input = newsletterForm.querySelector('input');
-  const btn = newsletterForm.querySelector('button');
-  if (!input.value.trim()) return;
-  btn.textContent = 'Subscribed!';
-  btn.style.background = '#0e7490';
-  input.value = '';
-  setTimeout(() => {
-    btn.textContent = 'Subscribe';
-    btn.style.background = '';
-  }, 3000);
-});
+// Newsletter handled via newsletter.html page
 
 // ===================================
 // SMOOTH ACTIVE NAV LINK highlight
