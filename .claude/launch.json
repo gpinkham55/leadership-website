@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "leadership-website",
+      "runtimeExecutable": "C:/node/node.exe",
+      "runtimeArgs": ["C:/Users/gpink/Documents/leadership-website/server.js"],
+      "port": 3000
+    }
+  ]
+}

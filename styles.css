@@ -403,23 +403,17 @@ ul { list-style: none; }
   position: relative;
 }
 .about-photo-placeholder {
-  background: var(--gray-100);
   border-radius: var(--radius);
   aspect-ratio: 4/5;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
-  color: var(--gray-400);
-  border: 2px dashed var(--gray-200);
+  overflow: hidden;
 }
-.about-photo-placeholder svg { width: 120px; height: 120px; }
-.photo-label {
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: var(--gray-400);
-  letter-spacing: 0.05em;
+.about-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  border-radius: var(--radius);
 }
 .about-stats-card {
   position: absolute;
